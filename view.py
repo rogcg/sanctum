@@ -93,11 +93,15 @@ class Page:
         archive_list = get_archive_list()
         tag_list = get_tag_list()
 
+        # Retrieve all pages
+        pages = blog.Page.all()
+
         values = {'archive_list': archive_list,
                   'tag_list': tag_list,
                   'user': users.get_current_user(),
                   'user_is_admin': users.is_current_user_admin(),
                   'logout': users.create_logout_url('/'),
+                  'pages':pages
                  }
 
         values.update({'settings': config.SETTINGS})
@@ -114,6 +118,13 @@ class Page:
 
         items = query.fetch(num + 1, offset)
 
+        # Retrieve all pages
+        pages = blog.Page.all()
+
+        template_values = {
+            'pages':pages
+        }
+
         values = {values_name: items}
         if len(items) > num:
             values.update({'next_offset': str(offset + num)})
@@ -129,6 +140,13 @@ class Page:
         # TODO: Add more error pages for 403, 500, etc.
         valid_errors = [404]
 
+        # Retrieve all pages
+        pages = blog.Page.all()
+
+        template_values = {
+            'pages':pages
+        }
+
         # If the error code given is not in the list then default to 404
         if error not in valid_errors:
             error = 404
@@ -136,4 +154,4 @@ class Page:
         # Set the error code on the handler
         handler.error(error)
 
-        self.render(handler, 'templates/error/%d.html' % error, {})
+        self.render(handler, 'templates/error/%d.html' % error, template_values)

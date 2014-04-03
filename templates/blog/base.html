@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Android, Web Development, Programming Tutorials and Science Related Posts">
     {% block meta_keywords  %}{% endblock %}
-    <meta name="author" content="Roger">
+    <meta name="author" content="{{ settings.auth }}">
     <title>{% block title %}{{ settings.title }} - {{ settings.description }}{% endblock %}</title>
 
     <!-- bootstrap core css -->
@@ -61,10 +61,9 @@
 
                         </ul>
 
-
                         <ul class="nav hidden-xs" id="sidebar-footer">
                             <li>
-                                <a href="http://wwww.rogcg.com"><h3>{{ settings.title }}</h3> {{ settings.description }}</a>
+                                <a href="{{ settings.url }}"><h3>{{ settings.title }}</h3> {{ settings.description }}</a>
                             </li>
                         </ul>
                     </div>
@@ -74,46 +73,19 @@
                 <div class="column col-sm-9" id="main">
                         <div class="padding">
                             <div class="full col-sm-9">
-                                <!-- pages content -->
+                                <!-- page content -->
                                 {% block content %}
                                 {% endblock %}
-                                <!-- /pages content -->
+                                <!-- /page content -->
 
                                 {% block footer %}
-                                    <!-- a fake footer -->
-                                    <div class="col-sm-12">
-                                        <div class="page-header text-muted divider">
-                                            Profiles
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-10">
-                                            <a href="http://twitter.com/rogcg" target="_blank">Twitter</a> <small class="text-muted">|</small> <a href="http://plus.google.com/+RogerCâmara">Google+</a>
-                                        </div>
-
-                                        <div class="col-sm-2 pull-right">
-                                            <!-- gittip -->
-                                            <script data-gittip-username="rogcg" data-gittip-widget="button" src="//gttp.co/v1.js"></script>
-                                            <span>  </span>
-                                            <!-- flattr -->
-                                            <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="{{ settings.url }}"></a>        
-                                        </div>
-                                    </div>
-
-                                    <hr>
-
                                     <div class="row" id="footer">
-                                        <div class="col-sm-6">
-
-                                        </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6 pull-right">
                                             <p>
-                                              <span class="pull-right">No copyrights &#8226; No license &#8226; Subscribe via <strong><a href="/blog/rss2">rss</a></strong> feed</span>.
+                                              <span class="pull-right">No copyrights &#8226; No license &#8226; Subscribe via <strong><a href="/blog/rss2">rss</a></strong> feed</span>
                                             </p>
                                         </div>
                                     </div>
-                                    <!-- /a fake footer -->
                                 {% endblock %}
                             </div>
                         </div>
@@ -130,7 +102,7 @@
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
           })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-          ga('create', '{{ settings.google_analytics }}', 'rogcg.com');
+          ga('create', '{{ settings.google_analytics }}', '{{ settings.url }}');
           ga('send', 'pageview');
 
         </script>
@@ -139,30 +111,6 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type='text/javascript' src="/static/bootstrap/js/bootstrap.min.js"></script>
-    
-    <!-- flattr button -->
-    <script type="text/javascript">
-    /* <![CDATA[ */
-        (function() {
-        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
-        t.parentNode.insertBefore(s, t);
-        })();
-    /* ]]> */
-    </script>
-    <!-- twitter share button -->
-    <script>
-        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement   (s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-    </script>
-    <!-- google plus button -->
-    <script type="text/javascript">
-      (function() {
-        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-        po.src = 'https://apis.google.com/js/plusone.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-      })();
-    </script>
+   
 </body>
 </html>

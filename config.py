@@ -11,6 +11,8 @@ SETTINGS = {
     'email': '',
     # Your blog url
     'url': '',
+    # The name of the theme (must match the folder name)
+    'theme':'',
     # Number of items to be shown on the posts index
     'items_per_page': 10,
     # Enable/disable Google Analytics

@@ -23,13 +23,6 @@
 
                     {% for tag in post.tags %} <a href="/blog/tag/{{ tag }}"><span class="label label-default">{{ tag }}</span></a>{% endfor %}
 
-                    <div class="row pull-right">
-                        <!-- gplus one -->
-                        <div class="g-plusone"></div>
-                        <!-- twitter -->
-                        <a href="https://twitter.com/share" class="twitter-share-button" data-via="rogcg">Tweet</a>                
-                    </div>
-
                     <h4>
                         <small class="text-muted">{{ post.pub_date|date:"F d Y - H:i" }}</small>
                     </h4>

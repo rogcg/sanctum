@@ -6,7 +6,12 @@ import logging
 from google.appengine.ext import webapp
 from google.appengine.api import users
 from models import blog
+
+import config
 import view
+
+# The theme used by the template configured in config.py
+THEME = config.SETTINGS['theme']
 
 class IndexHandler(webapp.RequestHandler):
 
@@ -25,7 +30,10 @@ class IndexHandler(webapp.RequestHandler):
         }
 
         page = view.Page()
-        page.render_paginated_query(self, query, 'posts', 'templates/blog/index.html', template_values)
+
+        path = 'templates/%s/blog/index.html' % THEME
+
+        page.render_paginated_query(self, query, 'posts', path, template_values)
 
 class PostHandler(webapp.RequestHandler):
 
@@ -56,7 +64,10 @@ class PostHandler(webapp.RequestHandler):
                 }
 
             page = view.Page()
-            page.render(self, 'templates/blog/post.html', template_values)
+
+            path = 'templates/%s/blog/post.html' % THEME
+
+            page.render(self, path, template_values)
 
 class TagHandler(webapp.RequestHandler):
     def get(self, tag):
@@ -69,7 +80,10 @@ class TagHandler(webapp.RequestHandler):
                           }
 
         page = view.Page()
-        page.render_paginated_query(self, query, 'posts', 'templates/blog/index.html', template_values)
+
+        path = 'templates/%s/blog/index.html' % THEME
+
+        page.render_paginated_query(self, query, 'posts', path, template_values)
 
 class YearHandler(webapp.RequestHandler):
 
@@ -91,7 +105,10 @@ class YearHandler(webapp.RequestHandler):
                           }
 
         page = view.Page()
-        page.render_paginated_query(self, query, 'posts', 'templates/blog/index.html', template_values)
+
+        path = 'templates/%s/blog/index.html' % THEME
+
+        page.render_paginated_query(self, query, 'posts', path, template_values)
 
 class MonthHandler(webapp.RequestHandler):
 
@@ -117,7 +134,10 @@ class MonthHandler(webapp.RequestHandler):
                           }
 
         page = view.Page()
-        page.render_paginated_query(self, query, 'posts', 'templates/blog/index.html', template_values)
+
+        path = 'templates/%s/blog/index.html' % THEME
+
+        page.render_paginated_query(self, query, 'posts', path, template_values)
 
 class DayHandler(webapp.RequestHandler):
 
@@ -143,7 +163,10 @@ class DayHandler(webapp.RequestHandler):
                           }
 
         page = view.Page()
-        page.render_paginated_query(self, query, 'posts', 'templates/blog/index.html', template_values)
+
+        path = 'templates/%s/blog/index.html' % THEME
+
+        page.render_paginated_query(self, query, 'posts', path, template_values)
 
 class RSS2Handler(webapp.RequestHandler):
 
@@ -180,9 +203,6 @@ class PageHandler(webapp.RequestHandler):
         # Retrieve a page based on its url
         page_obj = blog.Page.all().filter('url =', page_url).get()
         
-        # Retrieve all pages
-        pages = blog.Page.all()
-
         template_values = {}
 
         if page_obj == None:
@@ -190,9 +210,11 @@ class PageHandler(webapp.RequestHandler):
             page.render_error(self, 404)
         else:
             template_values = {
-                'page': page_obj,
-                'pages':pages
+                'page': page_obj
             }
 
         page = view.Page()
-        page.render(self, 'templates/blog/page.html', template_values)
+
+        path = 'templates/%s/blog/page.html' % THEME
+
+        page.render(self, path, template_values)
