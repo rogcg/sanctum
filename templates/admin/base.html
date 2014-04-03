@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Android, Web Development, Programming Tutorials and Science Related Posts">
+    {% block meta_keywords  %}{% endblock %}
+    <meta name="author" content="{{ settings.author }}">
+    <title>{% block title %}{{ settings.title }} - {{ settings.description }}{% endblock %}</title>
+
+    <!-- bootstrap core css -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:200,300,400,600,700' rel='stylesheet' type='text/css'>
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <link href="/blog/rss2" type="application/rss+xml" rel="alternate" title="{{ settings.title }} rss feed" />
+
+    <style type="text/css">
+        header 
+        {
+            margin-bottom:30px;
+        }
+    </style>
+</head>
+<body>
+
+  <header class="navbar navbar-default navbar-static-top" role="banner">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" class="navbar-brand">{{ settings.title }}</a>
+      </div>
+      <nav class="collapse navbar-collapse" role="navigation">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="#">Get Started</a>
+          </li>
+          <li>
+            <a href="#">Edit</a>
+          </li>
+          <li>
+            <a href="#">Visualize</a>
+          </li>
+          <li>
+            <a href="#">Prototype</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Begin Body -->
+  <div class="container">
+  	<div class="row">
+    			<div class="col-md-3" id="leftCol">
+                	
+  				<div class="well"> 
+                	<ul class="nav nav-stacked" id="sidebar">
+                    <li><a href="/admin/post/create">New Post</a></li>
+                    <li><a href="/admin/posts">My Posts</a></li>
+                    <hr>
+                    <li><a href="/admin/page/create">New Page</a></li>
+                    <li><a href="/admin/pages">My Pages</a></li>
+                	</ul>
+    				</div>
+
+        		</div>  
+        		<div class="col-md-9">
+                	<h2 id="sec0">Admin Page</h2>
+                  
+                  <hr>
+
+                	{% block content %}{% endblock %}
+                	
+        		</div> 
+    	</div>
+  </div>
+</body>
+
+</html>
+
+

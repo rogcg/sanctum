@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form class="form-horizontal well" method="post" action="{% if action %}{{ action }}{% else %}/admin/page/create{% endif %}">
+        <fieldset>
+              <legend>Create new page</legend>
+              <div class="control-group">
+                <label class="control-label" for="name">Page name</label>
+                <div class="controls">
+                  <input type="text" class="form-control input-sm" name="name" id="name" value="{% if page %}{{ page.name }}{% endif %}" />
+                  <small class="help-block">this will appear in title, links, etc</small>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <label class="control-label" for="url">Page Url</label>
+                <div class="controls">
+                  <input type="text" class="form-control input-sm" name="url" id="url" value="{% if page %}{{ page.url }}{% endif %}" />
+                  <small class="help-block">gotta be unique</small>
+                </div>
+              </div>
+              
+              <div class="control-group">
+                <label class="control-label" for="tags">Page Body</label>
+                <div class="controls">
+                  <textarea class="form-control input-xlarge" id="body" name="body" rows="5">{% if page %}{% if page.body %}{{ page.body }}{% endif %}{% endif %}</textarea>
+                    <small class="help-block">the content of your page. you can format it via markdown or html</small>
+                </div>
+              </div>
+             <hr>
+              <div class="form-actions">
+                  <input type="submit" class="btn btn-primary" name="submit" value="Submit" />
+                  <input type="submit" class="btn btn-success" name="submit" value="Preview" >
+              </div>
+        </fieldset>
+    </form>
+
+    {% if page %}
+        <hr>
+
+        <div class="panel panel-default">
+          <div class="panel-heading"><strong>Page Preview</strong></div>
+          <div class="panel-body">
+            <label class="control-label">Name</label>
+            <p>{{ page.name }}</p>
+            <hr>
+
+            <label class="control-label">Url</label>
+            <p>{{ page.url }}</p>
+            <hr>
+
+            <label class="control-label">Body</label>
+            <p>{{ page.body_html|safe }}</p>
+            <hr>
+
+          </div>
+        </div>
+           
+        </div>
+    {% endif %}
+
+{% endblock %}

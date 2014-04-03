@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <p>
+		{% if user %}
+			<h4>Hi {{ user.nickname }}! Pick an option on the sidebar.</h4>
+		{% endif %}
+	</p>	
+    
+{% endblock %}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Android, Web Development, Programming Tutorials and Science Related Posts">
+    {% block meta_keywords  %}{% endblock %}
+    <meta name="author" content="Roger">
+    <title>{% block title %}{{ settings.title }} - {{ settings.description }}{% endblock %}</title>
+
+    <!-- bootstrap core css -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- custom styles for this template -->
+    <link href="/static/css/style.css" rel="stylesheet">
+    
+    <!-- google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:200,300,400,600,700' rel='stylesheet' type='text/css'>
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+    <link href="/blog/rss2" type="application/rss+xml" rel="alternate" title="{{ settings.title }} rss feed" />
+</head>
+<body>
+
+    <!-- Wrap all page content here -->
+    <div class="wrapper">
+        <div class="box">
+            <div class="row">
+
+                {% block sidebar  %}
+                    <!-- sidebar -->
+                    <div class="column col-sm-3" id="sidebar">
+                        <a class="logo" href="/">R</a>
+                        <ul class="nav">
+                            <li class="active">
+                                <a href="/">Home</a>
+                            </li>
+                            
+                            <!-- The pages list goes here -->
+                            {% block pages %}
+
+                                <!-- In case some page is loaded it will be printed here with its link and name -->
+                                {% if pages %}
+                                    {% for page in pages %}
+                                        <li><a href="{{ page.url }}">{{ page.name }}</a></li>
+                                    {% endfor %}
+                                {% endif %}
+
+                            {% endblock %}
+                            
+                            {% if user %}
+                                <hr>
+                                <li><a href="/admin/posts">My Account</a></li>
+                                <li><a href="{{ logout }}">Logout</a></li>
+                            {% endif %}
+
+                        </ul>
+
+
+                        <ul class="nav hidden-xs" id="sidebar-footer">
+                            <li>
+                                <a href="http://wwww.rogcg.com"><h3>{{ settings.title }}</h3> {{ settings.description }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /sidebar -->
+                {% endblock %}
+
+                <div class="column col-sm-9" id="main">
+                        <div class="padding">
+                            <div class="full col-sm-9">
+                                <!-- pages content -->
+                                {% block content %}
+                                {% endblock %}
+                                <!-- /pages content -->
+
+                                {% block footer %}
+                                    <!-- a fake footer -->
+                                    <div class="col-sm-12">
+                                        <div class="page-header text-muted divider">
+                                            Profiles
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-10">
+                                            <a href="http://twitter.com/rogcg" target="_blank">Twitter</a> <small class="text-muted">|</small> <a href="http://plus.google.com/+RogerCâmara">Google+</a>
+                                        </div>
+
+                                        <div class="col-sm-2 pull-right">
+                                            <!-- gittip -->
+                                            <script data-gittip-username="rogcg" data-gittip-widget="button" src="//gttp.co/v1.js"></script>
+                                            <span>  </span>
+                                            <!-- flattr -->
+                                            <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="{{ settings.url }}"></a>        
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="row" id="footer">
+                                        <div class="col-sm-6">
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p>
+                                              <span class="pull-right">No copyrights &#8226; No license &#8226; Subscribe via <strong><a href="/blog/rss2">rss</a></strong> feed</span>.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- /a fake footer -->
+                                {% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if settings.google_analytics %}
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', '{{ settings.google_analytics }}', 'rogcg.com');
+          ga('send', 'pageview');
+
+        </script>
+    {% endif %}
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type='text/javascript' src="/static/bootstrap/js/bootstrap.min.js"></script>
+    
+    <!-- flattr button -->
+    <script type="text/javascript">
+    /* <![CDATA[ */
+        (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+        })();
+    /* ]]> */
+    </script>
+    <!-- twitter share button -->
+    <script>
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement   (s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+    </script>
+    <!-- google plus button -->
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
+</body>
+</html>
