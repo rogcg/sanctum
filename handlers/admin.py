@@ -1,6 +1,6 @@
-import datetime
-import logging
 import time
+import logging
+import datetime
 
 from google.appengine.ext import webapp
 from google.appengine.api import memcache
@@ -8,18 +8,22 @@ from google.appengine.api import users
 
 from models import blog
 import view
+import config
+
+# The theme used by the template configured in config.py
+THEME = config.SETTINGS['theme']
 
 class IndexHandler(webapp.RequestHandler):
 
     def get(self):
         page = view.Page()
-        page.render(self, 'templates/admin/index.html')
+        page.render(self, 'admin/index.html')
 
 class CreatePostHandler(webapp.RequestHandler):
 
     def get(self):
         page = view.Page()
-        page.render(self, 'templates/admin/post_form.html')
+        page.render(self, 'admin/post_form.html')
 
     def post(self):
         new_post = blog.Post()
@@ -50,7 +54,7 @@ class CreatePostHandler(webapp.RequestHandler):
                 'post': new_post,
                 }
             page = view.Page()
-            page.render(self, 'templates/admin/post_form.html', template_values)
+            page.render(self, 'admin/post_form.html', template_values)
 
 class ListPostsHandler(webapp.RequestHandler):
 
@@ -61,7 +65,7 @@ class ListPostsHandler(webapp.RequestHandler):
         template_values = {'page_title': 'Posts'}
 
         page = view.Page()
-        page.render_paginated_query(self, query, 'posts', 'templates/admin/posts.html', template_values)
+        page.render_paginated_query(self, query, 'posts', 'admin/posts.html', template_values)
 
 class DeletePostHandler(webapp.RequestHandler):
 
@@ -94,7 +98,7 @@ class DeletePostHandler(webapp.RequestHandler):
                 }
             
             page = view.Page()
-            page.render(self, 'templates/blog/post.html', template_values)
+            page.render(self, 'blog/post.html', template_values)
 
 class EditPostHandler(webapp.RequestHandler):
 
@@ -128,7 +132,7 @@ class EditPostHandler(webapp.RequestHandler):
                 }
 
             page = view.Page()
-            page.render(self, 'templates/admin/post_form.html', template_values)
+            page.render(self, 'admin/post_form.html', template_values)
 
     def post(self, year, month, day, slug):
         year = int(year)
@@ -170,6 +174,9 @@ class EditPostHandler(webapp.RequestHandler):
 
             if self.request.get('submit') == 'Submit':
                 post.put()
+                # for now I use this sleep here to wait the post be created. I can't find a way to 
+                # solve it. invesigate better later.
+                time.sleep(2)
                 self.redirect(post.get_absolute_url())
             else:
                 post.populate_html_fields()
@@ -178,7 +185,7 @@ class EditPostHandler(webapp.RequestHandler):
                     'post': post,
                 }
                 page = view.Page()
-                page.render(self, 'templates/admin/post_form.html', template_values)
+                page.render(self, 'admin/post_form.html', template_values)
 
 class ClearCacheHandler(webapp.RequestHandler):
 
@@ -209,7 +216,7 @@ class CreatePageHandler(webapp.RequestHandler):
                 'page': new_page,
                 }
             page = view.Page()
-            page.render(self, 'templates/admin/page_form.html', template_values)
+            page.render(self, 'admin/page_form.html', template_values)
 
 class ListPagesHandler(webapp.RequestHandler):
 
@@ -222,7 +229,7 @@ class ListPagesHandler(webapp.RequestHandler):
             }
 
         page = view.Page()
-        page.render_paginated_query(self, pages, 'pages', 'templates/admin/pages.html', template_values)
+        page.render_paginated_query(self, pages, 'pages', 'admin/pages.html', template_values)
 
 class EditPageHandler(webapp.RequestHandler):
 
@@ -242,7 +249,7 @@ class EditPageHandler(webapp.RequestHandler):
                 }
 
             page = view.Page()
-            page.render(self, 'templates/admin/page_form.html', template_values)
+            page.render(self, 'admin/page_form.html', template_values)
 
     def post(self):
         
@@ -269,7 +276,7 @@ class EditPageHandler(webapp.RequestHandler):
                     'post': post,
                 }
                 page = view.Page()
-                page.render(self, 'templates/admin/about_form.html', template_values)
+                page.render(self, 'admin/about_form.html', template_values)
 
 class DeletePageHandler(webapp.RequestHandler):
 
@@ -283,10 +290,12 @@ class DeletePageHandler(webapp.RequestHandler):
             page.render_error(self, 404)
         else:
             page_obj.delete()
-
+            # for now I use this sleep here to wait the post be created. I can't find a way to 
+            # solve it. invesigate better later.
+            time.sleep(2)
             template_values = {
                 'message': 'Your post has been deleted.'
                 }
             
             page = view.Page()
-            page.render(self, 'templates/blog/page.html', template_values)
+            page.render(self, 'blog/page.html', template_values)

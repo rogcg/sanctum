@@ -17,7 +17,7 @@ from handlers import blog, admin, error
 def main():
     application = webapp.WSGIApplication([('/', blog.IndexHandler),
                                           ('/blog/rss2', blog.RSS2Handler),
-                                          ('/blog/tag/([-\w]+)', blog.TagHandler),
+                                          ('/blog/tag/([\w _-]+)', blog.TagHandler),
                                           ('/blog/(\d{4})', blog.YearHandler),
                                           ('/blog/(\d{4})/(\d{2})', blog.MonthHandler),
                                           ('/blog/(\d{4})/(\d{2})/(\d{2})', blog.DayHandler),

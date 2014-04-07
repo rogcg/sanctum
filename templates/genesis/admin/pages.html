@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+        {% if pages %}
+    
+            <h3>My Pages</h3>
+            <hr>
+
+            {% for page in pages %}
+            <div class="post">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title"><strong>{{ page.name }}</strong></h2>
+                    </div>
+                    <div class="panel-body">
+                        
+                        {{ page.body_html|slice:":100"|safe }}..
+
+                        <div class="pull-right">
+                            <a href="{{ page.get_edit_url }}" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+                            <a href="{{ page.get_absolute_url }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-eye-open"></i> Preview</a>
+                            <a href="{{ page.get_delete_url }}" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <h4>You have no pages yet.. :(</h4>
+        {% endif %}
+    
+        <hr>
+
+        {% if prev_offset or next_offset %}
+            <div class="col-sm-16 last append-bottom">
+                {% if prev_offset %}
+                <a href="?offset={{ prev_offset }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous Pages</a>
+                {% endif %}
+                {% if next_offset %}
+                <a href="?offset={{ next_offset }}" class="btn btn-primary pull-right">Newer Pages <i class="glyphicon glyphicon-chevron-right"></i></a>
+                {% endif %}
+            </div>
+        {% endif %}
+    
+{% endblock %}
+
+

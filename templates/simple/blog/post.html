@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ settings.title }} - {{ page.name }}
+{% endblock %}
+
+{% block meta_keywords  %} 
+    <meta name="keywords" content="{{ post.tags|join:", " }}"> 
+{% endblock %}
+
+{% block content %}
+
+	<div class="col-sm-8 blog-main">
+		{% if post %}
+		
+			{% if user_is_admin %}
+	          <a class="btn btn-default btn-sm pull-right" href="{{ post.get_edit_url }}">Edit Post</a>
+	      	{% endif %}
+
+			<div class="blog-post">
+		        <h2 class="blog-post-title">{{ post.title }}</h2>
+		        <p class="blog-post-meta">{{ post.pub_date|date:"F d Y - H:i" }} - by {{ settings.author }}</p>
+		        <p>{% for tag in post.tags %} <a href="/blog/tag/{{ tag }}" class="tags"><span class="label label-default">{{ tag }}</span></a>{% endfor %}</p>
+				
+				<p>
+					{{ post.body_html|safe }}
+				</p>
+		    </div>
+		{% endif %}
+	</div>	
+{% endblock %}

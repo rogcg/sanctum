@@ -5,6 +5,10 @@ threadsafe: no
 api_version: 1
 
 handlers:
+
+- url: /res
+  static_dir: templates/simple/res
+
 - url: /static
   static_dir: static
 

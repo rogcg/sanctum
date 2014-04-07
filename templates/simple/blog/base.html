@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ settings.meta_description }}">
+    {% block meta_keywords %}{% endblock %}
+    <meta name="author" content="{{ settings.author }}">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <title></title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/res/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/res/css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    
+    {% block menu %}
+        <div class="blog-masthead">
+          <div class="container">
+            <nav class="blog-nav">
+              <a class="blog-nav-item active" href="/">Home</a>
+              <!-- The pages list goes here -->
+              {% block pages %}
+
+                  <!-- In case some page is loaded it will be printed herewith its link and name -->
+                  {% if pages %}
+                      {% for page in pages %}
+                          <a class="blog-nav-item" href="{{ page.url }}">{{ page.name }}</a>
+                      {% endfor %}
+                  {% endif %}
+
+              {% endblock %}
+              
+              {% if user %}
+                  <a class="blog-nav-item" href="/admin/posts">My Account</a>
+                  <a class="blog-nav-item" href="{{ logout }}">Logout</a>
+              {% endif %}
+            </nav>
+          </div>
+        </div>
+    {% endblock %}
+
+    <div class="container">
+
+      <div class="blog-header">
+        <h1 class="blog-title">{{ settings.title }}</h1>
+        <p class="lead blog-description">{{ settings.description }}</p>
+      </div>
+
+      <div class="row">
+
+        {% block content %}
+        {% endblock %}
+
+        {% block sidebar %}
+            <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+              <div class="sidebar-module">
+                <h4>Tags</h4>
+                {% if tag_list %}
+                    {% for tag_obj in tag_list %}
+                      <li><a href="{{ tag_obj.url }}">{{ tag_obj.tag }} ({{ tag_obj.count }})</a></li>
+                    {% endfor %}
+                {% endif %}
+              </div>
+              <div class="sidebar-module">
+                <h4>Archives</h4>
+                <ol class="list-unstyled">
+                  {% if archive_list %}
+                    {% for archive in archive_list %}
+                      <li><a href="{{ archive.url }}">{{ archive.date }} ({{ archive.count }})</a></li>
+                    {% endfor %}
+                  {% endif %}
+                </ol>
+              </div>
+              <div class="sidebar-module">
+                <h4>Elsewhere</h4>
+                <ol class="list-unstyled">
+                  <li><a href="http://github.com/rogcg/sanctum">GitHub</a></li>
+                  <li><a href="http://twitter.com/rogcg">Twitter</a></li>
+                </ol>
+              </div>
+            </div><!-- /.blog-sidebar -->
+        {% endblock %}
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    {% block footer %}
+        <div class="blog-footer">
+          <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+          <p>
+            <a href="#">Back to top</a>
+          </p>
+          <p>
+            <span><i>powered by <a href="{{ settings.sanctum_url }}">sanctum</a></i> <img src="/favicon.ico" width="30"></span>
+          </p>
+        </div>
+    {% endblock %}
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="res/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -12,6 +12,8 @@ from google.appengine.api import users
 import config
 from models import blog
 
+THEME = config.SETTINGS['theme']
+
 def get_archive_list():
     """Return a list of the archive months and their article counts."""
     # Attempt to get a memcache'd copy first
@@ -107,7 +109,9 @@ class Page:
         values.update({'settings': config.SETTINGS})
         values.update(template_values)
 
-        template_path = os.path.join(config.APP_ROOT_DIR, template_file)
+        # Here we retrieve the theme name and join with the template file
+        path = os.path.join(config.APP_ROOT_DIR, 'templates/%s' % THEME)
+        template_path = os.path.join(path, template_file)
 
         handler.response.out.write(unicode(template.render(template_path, values)))
 
@@ -133,6 +137,9 @@ class Page:
             values.update({'prev_offset': str(offset - num)})
         template_values.update(values)
 
+        path = os.path.join(config.APP_ROOT_DIR, 'templates/%s' % THEME)
+        template_path = os.path.join(path, template_file)
+
         self.render(handler, template_file, template_values)
 
     def render_error(self, handler, error):
@@ -154,4 +161,7 @@ class Page:
         # Set the error code on the handler
         handler.error(error)
 
-        self.render(handler, 'templates/error/%d.html' % error, template_values)
+        path = os.path.join(config.APP_ROOT_DIR, 'templates/%s' % THEME)
+        template_path = os.path.join(path, 'error/%d.html' % error)
+
+        self.render(handler, template_path, template_values)

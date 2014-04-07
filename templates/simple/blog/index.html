@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="col-sm-8 blog-main">
+
+		{% if posts %}
+			{% for post in posts %}
+			    <div class="blog-post">
+			        <h2 class="blog-post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+			        <p class="blog-post-meta">{{ post.pub_date|date:"F d Y - H:i" }} - by {{ settings.author }} </p>
+					
+					<p>
+						{{ post.excerpt_html|safe }}
+					</p>
+			    </div>
+		    {% endfor %}
+		{% else %}
+			<div class="blog-post">
+				<h4>No posts found</h4>
+			</div>
+		{% endif %}
+
+	  	<ul class="pager">
+	  		{% if next_offset %}
+	    		<li><a href="?offset={{ next_offset }}">Previous</a></li>
+	  		{% endif %}
+			{% if prev_offset %}
+	    		<li><a href="?offset={{ prev_offset }}">Next</a></li>
+			{% endif %}
+	  	</ul>
+
+    </div>
+{% endblock %}

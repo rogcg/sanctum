@@ -14,3 +14,9 @@ indexes:
   properties:
   - name: slug
   - name: pub_date
+
+- kind: Post
+  properties:
+  - name: tags
+  - name: pub_date
+    direction: desc
