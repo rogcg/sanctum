@@ -13,6 +13,19 @@ Sanctum is a blog engine for Google App Engine, using webapp and some django tem
 * Support for disqus comments on your posts.
 * RSS feed;
 
+#### Authentication
+
+The authentication is made using [GAE's User Service](https://developers.google.com/appengine/docs/python/gettingstartedpython27/usingusers), so, the application must be deployed to an App Engine account registered with your email, so, you only need to login with your google account and you are authenticated. Other emails won't have access to the administration page.
+
+##### Accessing the Administration Page
+
+All administration pages are under the admin route:
+
+* `yourdomain.appspot.com/admin/posts`
+* `yourdomain.appspot.com/admin/post/create`
+* `yourdomain.appspot.com/admin/pages`
+* `yourdomain.appspot.com/admin/page/create`
+
 #### Sanctum's engine directory hierarchy
 
 As you can see, the engine itself has multiple folders, they are explained here:
