@@ -26,7 +26,7 @@ All administration pages are under the admin route:
 * `yourdomain.appspot.com/admin/pages`
 * `yourdomain.appspot.com/admin/page/create`
 
-#### Sanctum's engine directory hierarchy
+#### Sanctum's directory hierarchy
 
 As you can see, the engine itself has multiple folders, they are explained here:
 
@@ -43,7 +43,7 @@ Now there are some files in the root of the application that deserve some attent
 * `main.py` in this file, the routes of the blog engine is defined.
 * `view.py` this file handles the rendering of the pages, handling the theme name, etc.
 
-#### Creating Custom Themes
+#### Creating custom themes
 
 Currently, _sanctum_ has two themes by default, **genesis** and **simple**, but you can create your own.
 
@@ -129,7 +129,7 @@ You may access content on your html pages by using these variables.
  - `{{ archive_obj.date }}` the date of the archive, which you can format and present to the user in a friendly format.
 
 
-#### Switching Themes
+#### Switching themes
 
 When you have a new theme on your blog living inside the `templates` directory and following the previous rules, then you are ready to use it. If you want to switch to your new theme follow this steps:
 
