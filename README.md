@@ -131,7 +131,7 @@ You may access content on your html pages by using these variables.
 
 #### Switching themes
 
-When you have a new theme on your blog living inside the `templates` directory and following the previous rules, then you are ready to use it. If you want to switch to your new theme follow this steps:
+When you have a new theme on your blog living inside the `templates` directory and following the previous rules, then you are ready to use it. If you want to switch to your new theme follow these steps:
 
 1. In the `config.py`, change the value of the `theme` option to the name of your theme folder (**THE NAME MUST BE EXACTLY THE SAME**)
 2. In the `app.yaml` inside the `handlers` option, the first rule defines the theme `res` files location, and you must change the `<theme-name>` to the name of your them directory (**THE NAME MUST BE EXACTLY THE SAME**), so you will find a rule like this in line 9:
