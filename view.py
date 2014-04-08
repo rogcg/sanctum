@@ -84,6 +84,7 @@ def get_tag_list():
                                 'count': tag_list[tag],
                                 'url': '/blog/tag/%s' % (tag),
                                })
+        
 
     memcache.set('tag_list', sorted_tag_list)
     return sorted_tag_list

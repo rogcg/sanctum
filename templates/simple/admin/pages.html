@@ -15,12 +15,15 @@
                     </div>
                     <div class="panel-body">
                         
-                        {{ page.body_html|slice:":100"|safe }}..
-
-                        <div class="pull-right">
-                            <a href="{{ page.get_edit_url }}" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
-                            <a href="{{ page.get_absolute_url }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-eye-open"></i> Preview</a>
-                            <a href="{{ page.get_delete_url }}" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> Delete</a>
+                        <div class="row">
+                            <div class="col-sm-9">
+                                {{ page.body_html|slice:":100"|safe }}
+                            </div>
+                            <div class="col-sm-3 pull-right">
+                                <a href="{{ page.get_edit_url }}" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+                                <a href="{{ page.get_absolute_url }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-eye-open"></i> Preview</a>
+                                <a href="{{ page.get_delete_url }}" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> Delete</a>  
+                            </div>
                         </div>
                     </div>
                 </div>

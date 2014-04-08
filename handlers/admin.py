@@ -92,7 +92,9 @@ class DeletePostHandler(webapp.RequestHandler):
             page.render_error(self, 404)
         else:
             post.delete() 
-
+            # for now I use this sleep here to wait the post be created. I can't find a way to 
+            # solve it. invesigate better later.
+            time.sleep(2)
             template_values = {
                 'message': 'Your post has been deleted.'
                 }
@@ -196,7 +198,7 @@ class CreatePageHandler(webapp.RequestHandler):
 
     def get(self):
         page = view.Page()
-        page.render(self, 'templates/admin/page_form.html')
+        page.render(self, 'admin/page_form.html')
 
     def post(self):
         new_page = blog.Page()
@@ -251,32 +253,32 @@ class EditPageHandler(webapp.RequestHandler):
             page = view.Page()
             page.render(self, 'admin/page_form.html', template_values)
 
-    def post(self):
+    def post(self, page_url):
         
-        # Create a query to check for slug uniqueness in the specified time span
-        query = blog.About.all()
+        page_obj = blog.Page.all().filter('url =', page_url).get()
         
-        post = query.get()
-
-        if post == None:
+        if page_obj == None:
             page = view.Page()
             page.render_error(self, 404)
         else:
-            action_url = post.get_edit_url()
-            post.title = self.request.get('title')
-            post.body = self.request.get('body')
+            action_url = page_obj.get_edit_url()
+            page_obj.title = self.request.get('title')
+            page_obj.body = self.request.get('body')
 
             if self.request.get('submit') == 'Submit':
-                post.put()
-                self.redirect(post.get_absolute_url())
+                page_obj.put()
+                # for now I use this sleep here to wait the post be created. I can't find a way to 
+                # solve it. invesigate better later.
+                time.sleep(2)
+                self.redirect(page_obj.get_absolute_url())
             else:
-                post.populate_html_fields()
+                page_obj.populate_html_fields()
                 template_values = {
                     'action': action_url,
-                    'post': post,
+                    'page': page_obj,
                 }
                 page = view.Page()
-                page.render(self, 'admin/about_form.html', template_values)
+                page.render(self, 'admin/page_form.html', template_values)
 
 class DeletePageHandler(webapp.RequestHandler):
 

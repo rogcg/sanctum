@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ settings.title }} - {{ page.name }}
+{% endblock %}
+
+{% block content %}
+	<div class="col-sm-8 blog-main">
+		{% if page %}
+			<div class="blog-post">
+		        <h2 class="blog-post-title">{{ page.name }}</h2>
+				<p>
+					{{ page.body_html|safe }}
+				</p>
+		    </div>
+		{% endif %}
+	</div>
+{% endblock %}
