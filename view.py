@@ -112,6 +112,7 @@ class Page:
 
         # Here we retrieve the theme name and join with the template file
         path = os.path.join(config.APP_ROOT_DIR, 'templates/%s' % THEME)
+
         template_path = os.path.join(path, template_file)
 
         handler.response.out.write(unicode(template.render(template_path, values)))

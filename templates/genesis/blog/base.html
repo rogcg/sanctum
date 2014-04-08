@@ -9,10 +9,10 @@
     <title>{% block title %}{{ settings.title }} - {{ settings.description }}{% endblock %}</title>
 
     <!-- bootstrap core css -->
-    <link href="res/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/res/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- custom styles for this template -->
-    <link href="res/css/style.css" rel="stylesheet">
+    <link href="/res/css/style.css" rel="stylesheet">
     
     <!-- google fonts -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:200,300,400,600,700' rel='stylesheet' type='text/css'>
@@ -81,7 +81,7 @@
                                 {% block footer %}
                                     <div class="row" id="footer">
                                         <div class="col-sm-6 pull-left">
-                                            <span><i>powered by <a href="{{ settings.sanctum_url }}">sanctum</a></i> <img src="favicon.ico" width="30"></span>
+                                            <span><i>powered by <a href="{{ settings.sanctum_url }}">sanctum</a></i> <img src="/favicon.ico" width="30"></span>
                                         </div>
                                         <div class="col-sm-6 pull-right">
                                             <p>
@@ -113,7 +113,7 @@
 
     <!-- Placed at the end of the document so the pages load faster -->
     <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type='text/javascript' src="res/bootstrap/js/bootstrap.min.js"></script>
+    <script type='text/javascript' src="/res/bootstrap/js/bootstrap.min.js"></script>
    
 </body>
 </html>
