@@ -7,6 +7,7 @@ Sanctum is a blog engine for Google App Engine, using webapp and some django tem
 
 * Support for page creation;
 * Support for post creation, edit and delete;
+* Support for themes;
 * Texts can be formatted using markdown or html;
 * Represent post with tags, separated by commas;
 * Support for disqus comments on your posts.
