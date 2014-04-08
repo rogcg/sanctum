@@ -1,4 +1,4 @@
-sanctum <img src="/static/img/favicon.png" width="60" alt="sanctum logo" />
+sanctum <img src="/static/img/favicon.png" width="50" alt="sanctum logo" />
 =======
 
 Sanctum is a blog engine for Google App Engine, using webapp and some django templates.
