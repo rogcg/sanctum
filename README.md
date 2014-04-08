@@ -85,14 +85,12 @@ You may access content on your html pages by using these variables.
 
 - `{{ settings.attr_name }}` If you want to access the values set in the `config.py`, where **attr_name** is one of those attributes from config.py.
 - `{{ user }}` the information of the current user logged.
-
 - `{{ pages }}` a list with all the pages retrieved from datastore.
 - `{{ page }}` the page object loaded by django on the template, this way you may access the Page model attributes:
  - `{{ page.name }}` the name of the page. It will be shown accross the whole application.
  - `{{ page.url }}` the url of the page, from where the users might reach it.
  - `{{ page.body }}` the content of the page without html tags.
  - `{{ page.body_html }}` the content of the page with html tags.
-
 - `{{ posts }}` a list of posts retrieved from datastore. You can fetch this list and get a single post object, where you can access its attributes.
 - `{{ post }}` a specific post retrieved from datastore, where you can access its attributes.
  - `{{ post.title }}` the title of the post
@@ -105,13 +103,11 @@ You may access content on your html pages by using these variables.
  - `{{ post.pub_date }}` the date the post has been published.
 - `{{ prev_offset }}` offset for previous page on posts list.
 - `{{ next_offset }}` offset for next page on posts list.
-
 - `{{ tag_list }}` a list of tags retrieve from the post.
 - `{{ tag_obj }}` when you fetch a tag list with a for loop, a tag object is retrieved from the `tag_list` tag, which you can access its specific attributes.
  - `{{ tag_obj.tag }}` the name of the tag, the label you defined for it on the creation of your post.
  - `{{ tag_obj.count }}` the amount of posts that uses this tag.
  - `{{ tag_obj.url }}` the url of the tag, which you can link to, and retrieve all posts in this tag.
-
 - `{{ archive_list }}` a list of months with archives.
 - `{{ archive_obj }}` when you fetch the `archive_list` with a for loop, an achive object is retrieved, and you can access its attributes.
  - `{{ archive_obj.url }}` the url of the archive, which you can link to, and get all posts from that epoch.
