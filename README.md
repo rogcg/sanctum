@@ -13,6 +13,7 @@ Licensed under MIT License
 * Texts can be formatted using markdown or html;
 * Represent post with tags, separated by commas;
 * Support for disqus comments on your posts.
+* Support for Google Analytics
 * RSS feed;
 
 #### Authentication
