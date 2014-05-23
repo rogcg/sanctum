@@ -20,7 +20,7 @@ class Post(db.Model):
     slug = db.StringProperty()
     pub_date = db.DateTimeProperty(auto_now_add=True)
     author = db.UserProperty(auto_current_user_add=True)
-
+	
     excerpt = db.TextProperty(default=None)
     body = db.TextProperty()
 

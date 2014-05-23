@@ -1,4 +1,4 @@
-application: your-app-id
+application: sanctum
 version: 1
 runtime: python27
 threadsafe: no
@@ -17,8 +17,14 @@ handlers:
   upload: static/img/favicon.png
 
 - url: /admin/.*
-  script: main.py
+  script: sanctum.py
   login: admin
 
-- url: .*
-  script: main.py
+- url: /.*
+  script: sanctum.app
+
+libraries:
+- name: webapp2
+  version: latest
+- name: django
+  version: "1.2"
