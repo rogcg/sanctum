@@ -13,13 +13,13 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <title>Sanctum by rogcg</title>
+    <title>sanctum by rogcg</title>
   </head>
 
   <body>
     <header>
       <div class="inner">
-        <h1>Sanctum</h1>
+        <h1>sanctum</h1>
         <h2>A blog engine for Google App Engine</h2>
         <a href="https://github.com/rogcg/sanctum" class="button"><small>View project on</small>GitHub</a>
       </div>
@@ -28,37 +28,264 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+          <h1>
+<a name="sanctum-" class="anchor" href="#sanctum-"><span class="octicon octicon-link"></span></a>sanctum <img src="https://raw.githubusercontent.com/rogcg/sanctum/master/static/img/favicon.png" width="50" alt="sanctum logo">
+</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>Sanctum is a blog engine for Google App Engine, using webapp and some django templates based on <a href="https://github.com/joeyb/joeyb-blog">joeyb-blog</a>.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<p>Licensed under MIT License</p>
+
+<h4>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h4>
+
+<ul>
+<li>Support for page creation;</li>
+<li>Support for post creation, edit and delete;</li>
+<li>Support for themes;</li>
+<li>Texts can be formatted using markdown or html;</li>
+<li>Represent post with tags, separated by commas;</li>
+<li>Support for disqus comments on your posts.</li>
+<li>Support for Google Analytics</li>
+<li>RSS feed;</li>
+</ul><h4>
+<a name="authentication" class="anchor" href="#authentication"><span class="octicon octicon-link"></span></a>Authentication</h4>
+
+<p>The authentication is made using <a href="https://developers.google.com/appengine/docs/python/gettingstartedpython27/usingusers">GAE's User Service</a>, so, the application must be deployed to an App Engine account registered with your email, so, you only need to login with your google account and you are authenticated. Other emails won't have access to the administration page.</p>
+
+<h5>
+<a name="accessing-the-administration-page" class="anchor" href="#accessing-the-administration-page"><span class="octicon octicon-link"></span></a>Accessing the Administration Page</h5>
+
+<p>All administration pages are under the admin route:</p>
+
+<ul>
+<li><code>yourdomain.appspot.com/admin/posts</code></li>
+<li><code>yourdomain.appspot.com/admin/post/create</code></li>
+<li><code>yourdomain.appspot.com/admin/pages</code></li>
+<li><code>yourdomain.appspot.com/admin/page/create</code></li>
+</ul><h4>
+<a name="sanctums-directory-hierarchy" class="anchor" href="#sanctums-directory-hierarchy"><span class="octicon octicon-link"></span></a>Sanctum's directory hierarchy</h4>
+
+<p>As you can see, the engine itself has multiple folders, they are explained here:</p>
+
+<ul>
+<li>
+<code>externals</code> all plugins and other libraries used by the python application.</li>
+<li>
+<code>handlers</code> the handlers of the application, that deals with blog execution and also admin. The main implementation of the blog are in side this folder.</li>
+<li>
+<code>models</code> this is where the model for each entity in application is defined, like Blog, Page, Post, etc, also some rules for each specific entity, in their respective files.</li>
+<li>
+<code>static</code> this is where the engine's static files resides. Engine's purpose only.</li>
+<li>
+<code>templates</code> all your themes must live inside this folder. For more information on creating a custom theme, see the <strong>Creating Custom Themes</strong> section.</li>
+</ul><p>Now there are some files in the root of the application that deserve some attention, they are:</p>
+
+<ul>
+<li>
+<code>app.yaml</code> as a GAE developer, you must know what this file is. HEHEHEH</li>
+<li>
+<code>config.py</code> the configuration of the blog lives inside this file. For more information read the <strong>Configuration</strong> section.</li>
+<li>
+<code>main.py</code> in this file, the routes of the blog engine is defined.</li>
+<li>
+<code>view.py</code> this file handles the rendering of the pages, handling the theme name, etc.</li>
+</ul><h4>
+<a name="creating-custom-themes" class="anchor" href="#creating-custom-themes"><span class="octicon octicon-link"></span></a>Creating custom themes</h4>
+
+<p>Currently, <em>sanctum</em> has two themes by default, <strong>genesis</strong> and <strong>simple</strong>, but you can create your own.</p>
+
+<p><strong>IF YOU ARE GOING TO CREATE A NEW THEME, FOLLOW THOSE LAYOUTS CODE, THERE ARE SOME DJANGO TAGS THAT YOU MUST RESPECT THE NAMES.</strong></p>
+
+<p>To create a custom theme, you must create a folder inside the <code>templates</code> directory, with the name of your theme. Each theme must have the same directory hierarchy, as you can see in themes <code>genesis</code> and <code>simple</code>, they both have the same hierarchy, <strong>the hierarchy must follow this rule</strong>:</p>
+
+<pre><code>+-- theme_folder
+    +-- admin
+        -- base.html
+        -- index.html
+        -- page_form.html
+        -- pages.html
+        -- post_form.html
+        -- posts.html
+    +--blog
+        -- base.html
+        -- index.html
+        -- page.html
+        -- post.html
+    +--error
+        -- base.html
+        -- 404.html
+    +--res 
+        +-- css
+        +-- img
+        +-- js
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<h6>
+<a name="folders-explanation" class="anchor" href="#folders-explanation"><span class="octicon octicon-link"></span></a>Folders explanation</h6>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<ul>
+<li>
+<code>admin</code> folder contains the layouts for the blog admin, where you can create new posts and pages and manage it. </li>
+<li>
+<code>blog</code> folder contains the layouts for the blog itself, the page that is shown to the reader.</li>
+<li>
+<code>error</code> folder that contains the html error pages.</li>
+<li>
+<code>res</code> all static resources for the template must be inside this folder, css, img and js, also, if you want to use other plugins or libraries, like the default templates use bootstrap, they all reside inside this folder.</li>
+</ul><h5>
+<a name="django-templates" class="anchor" href="#django-templates"><span class="octicon octicon-link"></span></a>Django templates</h5>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>You must obbey these django templates in order to present the correct information on the page.</p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<h6>
+<a name="blocks" class="anchor" href="#blocks"><span class="octicon octicon-link"></span></a>Blocks</h6>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<ul>
+<li>
+<code>{% block meta_keywords  %}{% endblock %}</code> place the meta keywords in your html files.</li>
+<li>
+<code>{% block title %}{% endblock %}</code> place the title of your page inside this block. This block goes in the the html  tag.</li>
+<li>
+<code>{% block content %}{% endblock %}</code> all the content of your page must go inside this block. E.g.: in your <code>base.html</code>, to load the content of the <strong>index.html</strong>.</li>
+<li>
+<code>{% block menu %}{% endblock %}</code> the menu shown in your page. In this blog, the options like, <em>Home</em>, <em>My Account</em>, <em>Logout</em> and other pages you create, are shown inside this block.</li>
+<li>
+<code>{% block pages %}{%endblock%}</code> this block goes inside the <code>{% block menu %}</code> block, it will load the pages you created inside the menu block and present it correctly in your page.</li>
+<li>
+<code>{% block sidebar %}{% endblock %}</code> in case you want to use a sidebar, it must live inside this block.</li>
+<li>
+<code>{% block footer %}{% endblock %}</code> the name is self obvious. Your footer goes inside this block.</li>
+</ul><h6>
+<a name="variables" class="anchor" href="#variables"><span class="octicon octicon-link"></span></a>Variables</h6>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<p>You may access content on your html pages by using these variables.</p>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<ul>
+<li>
+<code>{{ settings.attr_name }}</code> If you want to access the values set in the <code>config.py</code>, where <strong>attr_name</strong> is one of those attributes from config.py.</li>
+<li>
+<code>{{ user }}</code> the information of the current user logged.</li>
+<li>
+<code>{{ pages }}</code> a list with all the pages retrieved from datastore.</li>
+<li>
+<code>{{ page }}</code> the page object loaded by django on the template, this way you may access the Page model attributes:
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<ul>
+<li>
+<code>{{ page.name }}</code> the name of the page. It will be shown accross the whole application.</li>
+<li>
+<code>{{ page.url }}</code> the url of the page, from where the users might reach it.</li>
+<li>
+<code>{{ page.body }}</code> the content of the page without html tags.</li>
+<li>
+<code>{{ page.body_html }}</code> the content of the page with html tags.</li>
+</ul>
+</li>
+<li>
+<code>{{ posts }}</code> a list of posts retrieved from datastore. You can fetch this list and get a single post object, where you can access its attributes.</li>
+<li>
+<code>{{ post }}</code> a specific post retrieved from datastore, where you can access its attributes.
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<ul>
+<li>
+<code>{{ post.title }}</code> the title of the post</li>
+<li>
+<code>{{ post.slug }}</code> the slug of the post. It's a unique value.</li>
+<li>
+<code>{{ post.tags }}</code> a list of tags representing the post. You can fetch this list and retrieve single tags from it.</li>
+<li>
+<code>{{ post.excerpt }}</code> the excerpt of the post without html tags.</li>
+<li>
+<code>{{ post.excerpt_html }}</code> the excerpt of the post with html tags.</li>
+<li>
+<code>{{ post.body }}</code> the body of the post without html tags.</li>
+<li>
+<code>{{ post.body_html }}</code> the body of the post with html tags.</li>
+<li>
+<code>{{ post.pub_date }}</code> the date the post has been published.</li>
+</ul>
+</li>
+<li>
+<code>{{ prev_offset }}</code> offset for previous page on posts list.</li>
+<li>
+<code>{{ next_offset }}</code> offset for next page on posts list.</li>
+<li>
+<code>{{ tag_list }}</code> a list of tags retrieve from the post.</li>
+<li>
+<code>{{ tag_obj }}</code> when you fetch a tag list with a for loop, a tag object is retrieved from the <code>tag_list</code> tag, which you can access its specific attributes.
+
+<ul>
+<li>
+<code>{{ tag_obj.tag }}</code> the name of the tag, the label you defined for it on the creation of your post.</li>
+<li>
+<code>{{ tag_obj.count }}</code> the amount of posts that uses this tag.</li>
+<li>
+<code>{{ tag_obj.url }}</code> the url of the tag, which you can link to, and retrieve all posts in this tag.</li>
+</ul>
+</li>
+<li>
+<code>{{ archive_list }}</code> a list of months with archives.</li>
+<li>
+<code>{{ archive_obj }}</code> when you fetch the <code>archive_list</code> with a for loop, an achive object is retrieved, and you can access its attributes.
+
+<ul>
+<li>
+<code>{{ archive_obj.url }}</code> the url of the archive, which you can link to, and get all posts from that epoch.</li>
+<li>
+<code>{{ archive_obj.count }}</code> the amount of posts on that epoch.</li>
+<li>
+<code>{{ archive_obj.date }}</code> the date of the archive, which you can format and present to the user in a friendly format.</li>
+</ul>
+</li>
+</ul><h4>
+<a name="switching-themes" class="anchor" href="#switching-themes"><span class="octicon octicon-link"></span></a>Switching themes</h4>
+
+<p>When you have a new theme on your blog living inside the <code>templates</code> directory and following the previous rules, then you are ready to use it. If you want to switch to your new theme follow these steps:</p>
+
+<ol>
+<li>In the <code>config.py</code>, change the value of the <code>theme</code> option to the name of your theme folder (<strong>THE NAME MUST BE EXACTLY THE SAME</strong>)</li>
+<li>
+<p>In the <code>app.yaml</code> inside the <code>handlers</code> option, the first rule defines the theme <code>res</code> files location, and you must change the <code>&lt;theme-name&gt;</code> to the name of your them directory (<strong>THE NAME MUST BE EXACTLY THE SAME</strong>), so you will find a rule like this in line 9:</p>
+
+<pre><code>- url: /res
+  static_dir: templates/theme_name/res
+</code></pre>
+</li>
+</ol><p>Change the <strong>theme_name</strong> to your theme directory name.</p>
+
+<blockquote>
+<p>I know, I must work on this better, so it will detect the tempalte folder automatically, but for now it works like that.</p>
+</blockquote>
+
+<h4>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h4>
+
+<p>When you download the application, there are a few options you must configure before uploading it to your App Engine account. They are set in the <code>config.py</code> file and are self explanatory, but I'm gonna mention them here too:</p>
+
+<ul>
+<li>
+<code>title</code> a title for your page that will be shown across the whole blog.</li>
+<li>
+<code>description</code> a description for your blog, it can be a quote, a slogan, anything you want. It will be shown on the header and other pages.</li>
+<li>
+<code>author</code> the name of the author to be shown on the posts.</li>
+<li>
+<code>email</code> your email, to be shown as a contact, but you can leave this empty if you want.</li>
+<li>
+<code>url</code> the url of your blog. You can leave this empty, but sometimes it's needed when using google analytics, or other references to your blog using the url.</li>
+<li>
+<code>meta_description</code> meta description content to be added to the html file.</li>
+<li>
+<code>theme</code> the name of the theme being used. The name here must be exactly the same as the theme folder inside <code>templates</code> directory.</li>
+<li>
+<code>items_per_page</code> amount of items to be shown on the posts list on the index page.</li>
+<li>
+<code>google_analytics</code> if you want to use google analytics with your blog, set your tracking code (UA-xxxxxx-x) or False to disable it.</li>
+<li>
+<code>disqus</code> if you want to use disqus comments on your blog, just set your disqus username of False to disable it. The theme <code>genesis</code> contains a disqus comment implemented.</li>
+</ul><p><strong>Please consider leaving the "Powered by <em>sanctum</em>" label on bottom of your page, as an act of recognisiment for this work.</strong>
+<code>&lt;span&gt;&lt;i&gt;powered by &lt;a href="{{ settings.sanctum_url }}"&gt;sanctum&lt;/a&gt;&lt;/i&gt; &lt;img src="/favicon.ico" width="30"&gt;&lt;/span&gt;</code></p>
         </section>
 
         <aside id="sidebar">
