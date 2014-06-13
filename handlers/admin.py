@@ -2,7 +2,7 @@ import time
 import logging
 import datetime
 
-from google.appengine.ext import webapp
+import webapp2
 from google.appengine.api import memcache
 from google.appengine.api import users
 
@@ -13,13 +13,13 @@ import config
 # The theme used by the template configured in config.py
 THEME = config.SETTINGS['theme']
 
-class IndexHandler(webapp.RequestHandler):
+class IndexHandler(webapp2.RequestHandler):
 
     def get(self):
         page = view.Page()
         page.render(self, 'admin/index.html')
 
-class CreatePostHandler(webapp.RequestHandler):
+class CreatePostHandler(webapp2.RequestHandler):
 
     def get(self):
         page = view.Page()
@@ -56,9 +56,10 @@ class CreatePostHandler(webapp.RequestHandler):
             page = view.Page()
             page.render(self, 'admin/post_form.html', template_values)
 
-class ListPostsHandler(webapp.RequestHandler):
+class ListPostsHandler(webapp2.RequestHandler):
 
     def get(self):
+        
         query = blog.Post.all()
         query.order('-pub_date')
 
@@ -67,7 +68,7 @@ class ListPostsHandler(webapp.RequestHandler):
         page = view.Page()
         page.render_paginated_query(self, query, 'posts', 'admin/posts.html', template_values)
 
-class DeletePostHandler(webapp.RequestHandler):
+class DeletePostHandler(webapp2.RequestHandler):
 
     def get(self, year, month, day, slug):
         year = int(year)
@@ -102,7 +103,7 @@ class DeletePostHandler(webapp.RequestHandler):
             page = view.Page()
             page.render(self, 'blog/post.html', template_values)
 
-class EditPostHandler(webapp.RequestHandler):
+class EditPostHandler(webapp2.RequestHandler):
 
     def get(self, year, month, day, slug):
         year = int(year)
@@ -189,12 +190,12 @@ class EditPostHandler(webapp.RequestHandler):
                 page = view.Page()
                 page.render(self, 'admin/post_form.html', template_values)
 
-class ClearCacheHandler(webapp.RequestHandler):
+class ClearCacheHandler(webapp2.RequestHandler):
 
     def get(self):
         memcache.flush_all()
 
-class CreatePageHandler(webapp.RequestHandler):
+class CreatePageHandler(webapp2.RequestHandler):
 
     def get(self):
         page = view.Page()
@@ -220,7 +221,7 @@ class CreatePageHandler(webapp.RequestHandler):
             page = view.Page()
             page.render(self, 'admin/page_form.html', template_values)
 
-class ListPagesHandler(webapp.RequestHandler):
+class ListPagesHandler(webapp2.RequestHandler):
 
     def get(self):
         pages = blog.Page.all()
@@ -233,7 +234,7 @@ class ListPagesHandler(webapp.RequestHandler):
         page = view.Page()
         page.render_paginated_query(self, pages, 'pages', 'admin/pages.html', template_values)
 
-class EditPageHandler(webapp.RequestHandler):
+class EditPageHandler(webapp2.RequestHandler):
 
     def get(self, page_url):
 
@@ -280,7 +281,7 @@ class EditPageHandler(webapp.RequestHandler):
                 page = view.Page()
                 page.render(self, 'admin/page_form.html', template_values)
 
-class DeletePageHandler(webapp.RequestHandler):
+class DeletePageHandler(webapp2.RequestHandler):
 
     def get(self, url):
         

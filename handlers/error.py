@@ -1,8 +1,8 @@
-from google.appengine.ext import webapp
+import webapp2
 
 import view
 
-class Error404Handler(webapp.RequestHandler):
+class Error404Handler(webapp2.RequestHandler):
 
     def get(self):
         page = view.Page()

@@ -139,6 +139,8 @@ class Page:
             values.update({'prev_offset': str(offset - num)})
         template_values.update(values)
 
+        logging.info("THEME %s", THEME)
+
         path = os.path.join(config.APP_ROOT_DIR, 'templates/%s' % THEME)
         template_path = os.path.join(path, template_file)
 

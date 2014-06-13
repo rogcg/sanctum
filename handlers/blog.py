@@ -3,16 +3,17 @@ import config
 import PyRSS2Gen
 import logging
 
-from google.appengine.ext import webapp
+import webapp2
 from google.appengine.api import users
 from models import blog
 
 import config
 import view
 
-class IndexHandler(webapp.RequestHandler):
+class IndexHandler(webapp2.RequestHandler):
 
     def get(self):
+
         query = blog.Post.all()
         query.order('-pub_date')
 
@@ -30,7 +31,7 @@ class IndexHandler(webapp.RequestHandler):
 
         page.render_paginated_query(self, query, 'posts', 'blog/index.html', template_values)
 
-class PostHandler(webapp.RequestHandler):
+class PostHandler(webapp2.RequestHandler):
 
     def get(self, year, month, day, slug):
         year = int(year)
@@ -62,7 +63,7 @@ class PostHandler(webapp.RequestHandler):
 
             page.render(self, 'blog/post.html', template_values)
 
-class TagHandler(webapp.RequestHandler):
+class TagHandler(webapp2.RequestHandler):
     def get(self, tag):
         query = blog.Post.all()
         
@@ -76,7 +77,7 @@ class TagHandler(webapp.RequestHandler):
         page = view.Page()
         page.render_paginated_query(self, query, 'posts', 'blog/index.html', template_values)
 
-class YearHandler(webapp.RequestHandler):
+class YearHandler(webapp2.RequestHandler):
 
     def get(self, year):
         year = int(year)
@@ -99,7 +100,7 @@ class YearHandler(webapp.RequestHandler):
 
         page.render_paginated_query(self, query, 'posts', 'blog/index.html', template_values)
 
-class MonthHandler(webapp.RequestHandler):
+class MonthHandler(webapp2.RequestHandler):
 
     def get(self, year, month):
         year = int(year)
@@ -126,7 +127,7 @@ class MonthHandler(webapp.RequestHandler):
 
         page.render_paginated_query(self, query, 'posts', 'blog/index.html', template_values)
 
-class DayHandler(webapp.RequestHandler):
+class DayHandler(webapp2.RequestHandler):
 
     def get(self, year, month, day):
         year = int(year)
@@ -153,7 +154,7 @@ class DayHandler(webapp.RequestHandler):
 
         page.render_paginated_query(self, query, 'posts', 'blog/index.html', template_values)
 
-class RSS2Handler(webapp.RequestHandler):
+class RSS2Handler(webapp2.RequestHandler):
 
     def get(self):
         
@@ -181,7 +182,7 @@ class RSS2Handler(webapp.RequestHandler):
         self.response.headers['Content-Type'] = 'application/rss+xml'
         self.response.out.write(rss_xml)
 
-class PageHandler(webapp.RequestHandler):
+class PageHandler(webapp2.RequestHandler):
 
     def get(self, page_url):
         
