@@ -1,7 +1,7 @@
 sanctum <img src="/static/img/favicon.png" width="50" alt="sanctum logo" />
 =======
 
-Sanctum is a blog engine for Google App Engine, using webapp and some django templates based on [joeyb-blog](https://github.com/joeyb/joeyb-blog).
+Sanctum is a blog engine for Google App Engine, using webapp and Django templates based on [joeyb-blog](https://github.com/joeyb/joeyb-blog).
 
 Licensed under MIT License
 
