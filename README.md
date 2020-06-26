@@ -162,6 +162,3 @@ When you download the application, there are a few options you must configure be
 * `items_per_page` amount of items to be shown on the posts list on the index page.
 * `google_analytics` if you want to use google analytics with your blog, set your tracking code (UA-xxxxxx-x) or False to disable it.
 * `disqus` if you want to use disqus comments on your blog, just set your disqus username of False to disable it. The theme `genesis` contains a disqus comment implemented.
-
-**Please consider leaving the "Powered by _sanctum_" label on bottom of your page, as an act of recognisiment for this work.**
-`<span><i>powered by <a href="{{ settings.sanctum_url }}">sanctum</a></i> <img src="/favicon.ico" width="30"></span>`
