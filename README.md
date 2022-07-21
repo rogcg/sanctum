@@ -50,7 +50,7 @@ Now there are some files in the root of the application that deserve some attent
 
 Currently, _sanctum_ has two themes by default, **genesis** and **simple**, but you can create your own.
 
-**IF YOU ARE GOING TO CREATE A NEW THEME, FOLLOW THOSE LAYOUTS CODE, THERE ARE SOME DJANGO TAGS THAT YOU MUST RESPECT THE NAMES.**
+**IF YOU ARE GOING TO CREATE A NEW THEME, FOLLOW THOSE LAYOUTS CODE, THERE ARE SOME DJANGO TAGS THAT YOU MUST FOLLOW THE NAMES.**
 
 To create a custom theme, you must create a folder inside the `templates` directory, with the name of your theme. Each theme must have the same directory hierarchy, as you can see in themes `genesis` and `simple`, they both have the same hierarchy, **the hierarchy must follow this rule**:
 
@@ -84,7 +84,7 @@ To create a custom theme, you must create a folder inside the `templates` direct
 
 ##### Django templates
 
-You must obbey these django templates in order to present the correct information on the page.
+You must follow these django templates in order to present the correct information on the page.
 
 ###### Blocks
 
@@ -143,9 +143,6 @@ When you have a new theme on your blog living inside the `templates` directory a
           static_dir: templates/theme_name/res
 
 Change the **theme_name** to your theme directory name.
-
-
-> I know, I must work on this better, so it will detect the tempalte folder automatically, but for now it works like that.
 
 
 #### Configuration
